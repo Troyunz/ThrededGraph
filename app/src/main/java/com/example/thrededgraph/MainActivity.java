@@ -93,8 +93,13 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 if(updategraph == false) {
-                    startthread();
-                    mgraphthread.start();
+                    updategraph = true;
+//                    mgraphthread.start();
+//                    String sin = sinfun.getText().toString();
+//                    Message message = Message.obtain();
+//                    message.obj = sin;
+//                    mgraphthread.mhandler.sendMessage(message);
+                    mgraphthread.mhandler.thread.start();
                 }
                 else {
                     Toast.makeText(MainActivity.this, "Already running!!", Toast.LENGTH_SHORT).show();
@@ -110,9 +115,11 @@ public class MainActivity extends AppCompatActivity{
                 if(mgraphthread != null){
                     updategraph = false;
 //                    handler.dataSets.clear();
-                    mgraphthread.interrupt();
-                    lineChart.invalidate();
-                    lineChart.clear();
+                    Message message = Message.obtain();
+                    mgraphthread.mhandler.removeCallbacks(mgraphthread.mhandler.thread);
+                    mgraphthread.mhandler.thread.interrupt();
+//                    lineChart.invalidate();
+//                    lineChart.clear();
                 }else{
                     Toast.makeText(MainActivity.this, "Already stopped!!", Toast.LENGTH_SHORT).show();
                 }

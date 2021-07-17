@@ -3,6 +3,7 @@ package com.example.thrededgraph;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -22,6 +23,7 @@ public class GraphHandler extends Handler {
     List<Entry> sinEntries = new ArrayList<>();
     List<ILineDataSet> dataSets = new ArrayList<>();
     LineDataSet sinSet;
+    public Thread thread;
     float i;
 
 //    ILineDataSet set;
@@ -59,7 +61,14 @@ public class GraphHandler extends Handler {
         mActivity.lineChart.notifyDataSetChanged();
         mActivity.lineChart.invalidate();
 //        mActivity.lineChart.moveViewToX(sinSet.getEntryCount());
-        sinfun();
+        thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                sinfun();
+            }
+        });
+        thread.start();
+
 
     }
 
@@ -78,13 +87,20 @@ public class GraphHandler extends Handler {
 
     private void sinfun() {
         LineData data = mActivity.lineChart.getLineData();
-        if(data != null)
+        if(data != null && !sinEntries.isEmpty())
         {
+
 
             while(true) {
 
                 data.addEntry(new Entry(i, (float) Math.sin(i) + 5), 0);
-
+//                sinEntries.add(new Entry(i ,(float) Math.sin(i) + 5));
+//                Entry sinv = sinEntries.get((int) (i-7f));
+//                sinEntries.remove(sinv);
+//                if(!mActivity.updategraph)
+//                {
+//                    break;
+//                }
                 float xmin = data.getXMin();
                 dataSets.remove(sinSet.removeEntryByXValue(xmin));
                 data.notifyDataChanged();
@@ -93,11 +109,14 @@ public class GraphHandler extends Handler {
                 mActivity.lineChart.moveViewToX(data.getEntryCount());
                 i += 0.02f;
                 try {
-                    Thread.sleep(10);
+                    Thread.sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
+        }
+        else{
+            Toast.makeText(mActivity, "Sin entries null!", Toast.LENGTH_SHORT).show();
         }
 //        while(true){
 //            sinEntries.add(0, new Entry(i, (float) Math.sin(i) + 5));
