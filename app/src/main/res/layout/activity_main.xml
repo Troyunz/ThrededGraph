@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <RelativeLayout
+        android:id="@+id/yfun"
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+        <TextView
+            android:id="@+id/y"
+            android:text="Y = "
+            android:textSize="30dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="20dp"
+            android:gravity="center"
+            android:layout_width="100dp"
+            android:layout_height="50dp"/>
+        <EditText
+            android:id="@+id/sin"
+            android:hint="enter fun"
+            android:layout_toRightOf="@id/y"
+            android:layout_marginTop="40dp"
+            android:layout_width="100dp"
+            android:layout_height="50dp"/>
+
+        <Button
+            android:id="@+id/enter"
+            android:layout_below="@id/y"
+            android:layout_marginLeft="70dp"
+            android:layout_marginTop="10dp"
+            android:text="ENTER"
+            android:textSize="15sp"
+            android:layout_width="100dp"
+            android:layout_height="50dp"/>
+
+        <Button
+            android:id="@+id/pause"
+            android:layout_toRightOf="@id/sin"
+            android:layout_marginTop="10dp"
+            android:text="Pause"
+            android:layout_below="@id/play"
+            android:layout_marginLeft="30dp"
+            android:layout_width="100dp"
+            android:layout_height="50dp"/>
+
+        <Button
+            android:id="@+id/play"
+            android:layout_toRightOf="@id/sin"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="30dp"
+            android:layout_width="100dp"
+            android:text="Play"
+            android:layout_height="50dp"/>
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_below="@id/yfun"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/graph_rel"
+        android:layout_marginTop="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp">
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/graph"/>
+    </RelativeLayout>
+
+
+</RelativeLayout>
