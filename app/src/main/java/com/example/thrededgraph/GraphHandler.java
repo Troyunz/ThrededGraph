@@ -59,7 +59,7 @@ public class GraphHandler extends Handler {
         mActivity.lineChart.notifyDataSetChanged();
         mActivity.lineChart.invalidate();
 //        mActivity.lineChart.moveViewToX(sinSet.getEntryCount());
-//        sinfun();
+        sinfun();
 
     }
 
@@ -80,11 +80,10 @@ public class GraphHandler extends Handler {
         LineData data = mActivity.lineChart.getLineData();
         if(data != null)
         {
-            ILineDataSet set = data.getDataSetByIndex(0);
 
             while(true) {
 
-                data.addEntry(new Entry(sinSet.getEntryCount(), (float) Math.sin(i) + 5),0);
+                data.addEntry(new Entry(i, (float) Math.sin(i) + 5), 0);
 
                 data.notifyDataChanged();
                 mActivity.lineChart.notifyDataSetChanged();
