@@ -3,6 +3,7 @@ package com.example.thrededgraph;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,7 +24,6 @@ public class GraphHandler extends Handler {
     List<Entry> sinEntries = new ArrayList<>();
     List<ILineDataSet> dataSets = new ArrayList<>();
     LineDataSet sinSet;
-    public Thread thread;
     float i;
 
 //    ILineDataSet set;
@@ -61,33 +61,28 @@ public class GraphHandler extends Handler {
         mActivity.lineChart.notifyDataSetChanged();
         mActivity.lineChart.invalidate();
 //        mActivity.lineChart.moveViewToX(sinSet.getEntryCount());
-        thread = new Thread(new Runnable() {
+
+        sinfun();
+  ;
+
+        mActivity.play.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
+            public void onClick(View v) {
+                mActivity.updategraph = true;
                 sinfun();
             }
         });
-        thread.start();
+
+
 
 
     }
 
-    private ILineDataSet createSet() {
-        LineDataSet set = new LineDataSet(null, "Dynamic Data");
-        set.setAxisDependency(YAxis.AxisDependency.LEFT);
-        set.setLineWidth(3f);
-        set.setColor(Color.MAGENTA);
-        set.setHighlightEnabled(false);
-        set.setDrawValues(false);
-        set.setDrawCircles(false);
-        set.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-        set.setCubicIntensity(0.2f);
-        return set;
-    }
+
 
     private void sinfun() {
         LineData data = mActivity.lineChart.getLineData();
-        if(data != null && !sinEntries.isEmpty())
+        if(data != null)
         {
 
 
@@ -97,10 +92,10 @@ public class GraphHandler extends Handler {
 //                sinEntries.add(new Entry(i ,(float) Math.sin(i) + 5));
 //                Entry sinv = sinEntries.get((int) (i-7f));
 //                sinEntries.remove(sinv);
-//                if(!mActivity.updategraph)
-//                {
-//                    break;
-//                }
+                if(!mActivity.updategraph)
+                {
+                    break;
+                }
                 float xmin = data.getXMin();
                 dataSets.remove(sinSet.removeEntryByXValue(xmin));
                 data.notifyDataChanged();
@@ -114,6 +109,7 @@ public class GraphHandler extends Handler {
                     e.printStackTrace();
                 }
             }
+
         }
         else{
             Toast.makeText(mActivity, "Sin entries null!", Toast.LENGTH_SHORT).show();

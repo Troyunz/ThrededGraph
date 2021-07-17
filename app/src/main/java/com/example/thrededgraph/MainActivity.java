@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity{
     public GraphThread mgraphthread;
     private TextView y;
     private Button enter;
-    private Button play, pause;
+    public Button play, pause;
     private EditText sinfun;
     GraphView graphView;
     boolean updategraph = true;
@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity{
 //                    Message message = Message.obtain();
 //                    message.obj = sin;
 //                    mgraphthread.mhandler.sendMessage(message);
-                    mgraphthread.mhandler.thread.start();
+//                    mgraphthread.mhandler.thread.start();
                 }
                 else {
                     Toast.makeText(MainActivity.this, "Already running!!", Toast.LENGTH_SHORT).show();
@@ -116,8 +116,8 @@ public class MainActivity extends AppCompatActivity{
                     updategraph = false;
 //                    handler.dataSets.clear();
                     Message message = Message.obtain();
-                    mgraphthread.mhandler.removeCallbacks(mgraphthread.mhandler.thread);
-                    mgraphthread.mhandler.thread.interrupt();
+//                    mgraphthread.mhandler.removeCallbacksAndMessages(null);
+//                    mgraphthread.mhandler.thread.interrupt();
 //                    lineChart.invalidate();
 //                    lineChart.clear();
                 }else{
