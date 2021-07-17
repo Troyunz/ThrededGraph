@@ -85,6 +85,8 @@ public class GraphHandler extends Handler {
 
                 data.addEntry(new Entry(i, (float) Math.sin(i) + 5), 0);
 
+                float xmin = data.getXMin();
+                dataSets.remove(sinSet.removeEntryByXValue(xmin));
                 data.notifyDataChanged();
                 mActivity.lineChart.notifyDataSetChanged();
                 mActivity.lineChart.setVisibleXRangeMaximum(150);
