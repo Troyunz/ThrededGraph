@@ -1,3 +1,3 @@
 # ThrededGraph
 
-![gif](graph2.gif)
+<img src="graph2.gif" width="480" height="820"/>
